@@ -3,9 +3,9 @@ count,1074
 mean,33.27
 std,19.61               # Desvio padrão(mede quanto os preços variam em relação à média.)
 min,2.99
-25%,24.92               
-50%,29.90               # Mediana(metade do mercado nessa faixa)
-75%,38.49
+25%,24.92               # Q1
+50%,29.90               # Mediana
+75%,38.49               # Q3
 max,194.98
 
 ----------------------------------------------------------------------------------------
