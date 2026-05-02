@@ -85,6 +85,23 @@ A faixa `ate_100g` tende a apresentar preco por 500g muito mais alto, porque con
 
 Essa separacao deixa a analise mais justa: em vez de comparar todos os cafes juntos, compara produtos por tamanho aproximado.
 
+## Graficos da analise
+
+Os graficos foram gerados na pasta `results/graficos` pelo script `scripts/gerar_graficos.py`.
+
+Arquivos gerados:
+
+- `01_preco_por_loja.png`: compara media e mediana de preco por loja.
+- `02_distribuicao_precos_loja.png`: mostra a dispersao de precos por loja e evidencia outliers.
+- `03_top_fabricantes_mix.png`: mostra os fabricantes com maior quantidade total de produtos.
+- `04_mix_fabricantes_por_loja.png`: compara o mix dos principais fabricantes entre as lojas.
+- `05_preco_500g_por_loja.png`: compara o preco mediano normalizado para 500g por loja.
+- `06_preco_500g_faixa_peso_loja.png`: compara o preco por 500g dentro de cada faixa de peso e loja, desconsiderando `sem_peso` porque essa categoria nao permite normalizacao por gramas.
+- `07_preco_mediano_fabricante.png`: destaca fabricantes com maior preco mediano, considerando fabricantes com pelo menos 5 produtos.
+- `08_evolucao_preco_medio.png`: mostra a evolucao do preco medio no periodo analisado.
+
+Para uma apresentacao, os graficos mais importantes sao `01_preco_por_loja.png`, `02_distribuicao_precos_loja.png`, `04_mix_fabricantes_por_loja.png`, `05_preco_500g_por_loja.png` e `06_preco_500g_faixa_peso_loja.png`.
+
 ## Evolucao de preco do cafe
 
 Mercado relativamente estavel.
