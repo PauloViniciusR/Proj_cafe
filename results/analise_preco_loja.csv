@@ -2,33 +2,3 @@ Loja,mean,median,min,max,count
 St Marche,36.00,31.99,2.99,165.29,282
 Mambo,34.09,29.9,3.59,194.98,456
 PaodeAcucar,29.84,27.965,2.99,149.9,336
-
---------------------------------------------------------------
-A análise de preços de café entre os supermercados
-indica diferenças claras de posicionamento. O St Marche
-apresenta o maior preço médio (≈R$36) e mediana de R$31,
-sugerindo presença significativa de produtos premium.
-
-O Mambo apresenta preços intermediários enquanto
-o Pão de Açúcar demonstra maior competitividade de
-preço no mercado analisado.
-
-A diferença entre média e mediana nas lojas indica
-a existência de produtos de alto valor que elevam
-o preço médio especialmente no St Marche.
-
-
------------------------------------ OUTLIERS --------------------------
-https://marche.com.br/collections/mercearia/products/cappuccino-lor-baunilha-8-unidades-162-4g?store_id=66677604431
-
-Temos a presença de outliers na distribuição de preços. 
-O menor corresponde a um produto em formato de dose individual, 
-enquanto o maior preçO refere-se a um café premium em grãos. Esses extremos ampliam a dispersão dos dados
-
-https://marche.com.br/collections/mercearia/products/cafe-espresso-graos-cafe-do-ponto-1kg?store_id=66677604431
-
-
-
-* Para melhorar o dataset * 
-
-normalização por peso(ex:  categorizar por G e KG)

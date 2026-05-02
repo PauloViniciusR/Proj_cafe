@@ -1,31 +1,4 @@
-Data,Média Preço Normal,Média Preço Oferta,Desvio_Preco,Desconto_Medio_%
-2026-03-06,30.13,30.13,12.67,0.0
-2026-03-07,31.02,31.02,15.53,0.0
-2026-03-08,29.84,29.84,13.96,0.0
-
---------------------------------------------------------------------------------------
-Mercado relativamente estável
-
-O preço médio varia pouco (30,14 → 31,03 → 29,85), 
-o que indica preços consistentes no período curto analisado
-Pequenas oscilações podem refletir ajustes de estoque
-
---------------------------------------------------------------------------------------
-Alta dispersão de preços
-
-O desvio alto (~13–15) indica variedade de preços entre produtos. provavelmente devido a:
-marcas premium vs tradicionais
-tamanhos diferentes de pacotes
-linhas gourmet ou cápsulas especiais
-
-- o consumidor encontra desde produtos econômicos até premium e isso aumenta a dispersão mesmo com preço médio estável.
-
---------------------------------------------------------------------------------------
-Nenhuma promoção significativa nesse período
-Desconto médio 0% significa que nenhuma promoção impactou o preço médio.
-
---------------------------------------------------------------------------------------
-Possível sinal de ajuste de preços
-06/03 → 30.14
-07/03 → 31.03 (aumento)
-08/03 → 29.85 (queda)
+Data,Média Preço Normal,Média Preço Oferta,Desvio_Preco
+2026-03-06,30.13,30.13,12.67
+2026-03-07,31.02,31.02,15.53
+2026-03-08,29.84,29.84,13.96
