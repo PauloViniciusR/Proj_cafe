@@ -31,9 +31,20 @@ Com isso, a análise evita conclusões distorcidas baseadas apenas no preço bru
 
 ## Estrutura
 
-- `base/`: bases utilizadas no projeto
-- `results/`: tabelas finais, notas analíticas e gráficos
-- `scripts/`: scripts para geração dos gráficos
+```
+Proj_cafe/
+├── dados/                      # Bases utilizadas no projeto
+├── notebooks/
+│   ├── 01_analise_cafe.ipynb   # Análise principal
+│   └── eda/                    # Notebooks exploratórios por loja
+├── relatorios/
+│   ├── graficos/               # Visualizações exportadas (.png)
+│   └── tabelas/                # Tabelas de análise geradas (.csv)
+├── src/                        # Scripts auxiliares
+├── .gitignore
+├── environment.yml
+└── README.md
+```
 
 ## Observação
 
