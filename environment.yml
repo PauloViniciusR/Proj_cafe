@@ -54,6 +54,7 @@ dependencies:
       - debugpy==1.8.20
       - decorator==5.2.1
       - defusedxml==0.7.1
+      - et-xmlfile==2.0.0
       - executing==2.2.1
       - fastjsonschema==2.21.2
       - fonttools==4.62.1
@@ -99,8 +100,8 @@ dependencies:
       - notebook==7.5.6
       - notebook-shim==0.2.4
       - numpy==2.4.4
-      - overrides==7.7.0
       - openpyxl==3.1.5
+      - overrides==7.7.0
       - pandas==3.0.2
       - pandocfilters==1.5.1
       - parso==0.8.7
@@ -146,3 +147,4 @@ dependencies:
       - webencodings==0.5.1
       - websocket-client==1.9.0
       - widgetsnbextension==4.0.15
+prefix: /home/paulo-vinicius/miniconda3/envs/projeto_dados
