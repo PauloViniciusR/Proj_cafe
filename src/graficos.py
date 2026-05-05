@@ -10,9 +10,9 @@ import pandas as pd
 import seaborn as sns
 
 
-RESULTS = ROOT / "results"
 BASE = ROOT / "base"
-OUT = RESULTS / "graficos"
+TABELAS = ROOT / "relatorios" / "tabelas"
+OUT = ROOT / "relatorios" / "graficos"
 
 
 def salvar(fig, nome):
@@ -30,8 +30,44 @@ def configurar_estilo():
     plt.rcParams["axes.titlesize"] = 14
 
 
+def formatar_valor(valor, casas=2):
+    if pd.isna(valor):
+        return ""
+    if casas == 0:
+        return f"{valor:.0f}"
+    return f"{valor:.{casas}f}"
+
+
+def rotular_barras_verticais(ax, casas=2):
+    for container in ax.containers:
+        labels = [formatar_valor(barra.get_height(), casas) for barra in container]
+        ax.bar_label(
+            container,
+            labels=labels,
+            label_type="edge",
+            padding=-15,
+            fontsize=9,
+            color="white",
+        )
+    ax.margins(y=0.12)
+
+
+def rotular_barras_horizontais(ax, casas=2):
+    for container in ax.containers:
+        labels = [formatar_valor(barra.get_width(), casas) for barra in container]
+        ax.bar_label(
+            container,
+            labels=labels,
+            label_type="edge",
+            padding=-30,
+            fontsize=9,
+            color="white",
+        )
+    ax.margins(x=0.15)
+
+
 def grafico_preco_por_loja():
-    df = pd.read_csv(RESULTS / "analise_preco_loja.csv")
+    df = pd.read_csv(TABELAS / "01_analise_preco_loja.csv")
     df = df.sort_values("median", ascending=False)
 
     fig, ax = plt.subplots()
@@ -45,6 +81,7 @@ def grafico_preco_por_loja():
     ax.set_title("Preco medio e mediano por loja")
     ax.set_ylabel("Preco (R$)")
     ax.legend()
+    rotular_barras_verticais(ax)
 
     salvar(fig, "01_preco_por_loja.png")
 
@@ -63,7 +100,7 @@ def grafico_distribuicao_precos():
 
 
 def grafico_mix_fabricantes():
-    df = pd.read_csv(RESULTS / "analise_mix.csv")
+    df = pd.read_csv(TABELAS / "03_analise_mix.csv")
     top = df.sort_values("Total", ascending=False).head(12)
     top = top.sort_values("Total", ascending=True)
 
@@ -72,12 +109,13 @@ def grafico_mix_fabricantes():
     ax.set_title("Top fabricantes por quantidade de produtos")
     ax.set_xlabel("Quantidade de produtos")
     ax.set_ylabel("Fabricante")
+    rotular_barras_horizontais(ax, casas=0)
 
     salvar(fig, "03_top_fabricantes_mix.png")
 
 
 def grafico_mix_por_loja():
-    df = pd.read_csv(RESULTS / "analise_mix.csv")
+    df = pd.read_csv(TABELAS / "03_analise_mix.csv")
     top = df.sort_values("Total", ascending=False).head(10)
     top = top.set_index("Fabricante")[["Mambo", "St.Marche", "Paodeacucar"]]
 
@@ -88,12 +126,13 @@ def grafico_mix_por_loja():
     ax.set_ylabel("Quantidade de produtos")
     ax.tick_params(axis="x", rotation=45)
     ax.legend(title="Loja")
+    rotular_barras_verticais(ax, casas=0)
 
-    salvar(fig, "04_mix_fabricantes_por_loja.png")
+    salvar(fig, "3.1_mix_fabricantes_por_loja.png")
 
 
 def grafico_preco_normalizado_loja():
-    df = pd.read_csv(RESULTS / "analise_preco_normalizado_peso_loja.csv")
+    df = pd.read_csv(TABELAS / "05_analise_preco_normalizado_peso_loja.csv")
     df = df.sort_values("preco_500g_mediano", ascending=False)
 
     fig, ax = plt.subplots()
@@ -101,12 +140,13 @@ def grafico_preco_normalizado_loja():
     ax.set_title("Preco mediano normalizado por 500g")
     ax.set_xlabel("Loja")
     ax.set_ylabel("Preco mediano por 500g (R$)")
+    rotular_barras_verticais(ax)
 
-    salvar(fig, "05_preco_500g_por_loja.png")
+    salvar(fig, "04_preco_500g_por_loja.png")
 
 
 def grafico_faixa_peso_loja():
-    df = pd.read_csv(RESULTS / "analise_faixa_peso_loja.csv")
+    df = pd.read_csv(TABELAS / "04_analise_faixa_peso_loja.csv")
     df = df[df["faixa_peso"] != "sem_peso"].copy()
     ordem = ["ate_100g", "101g_250g", "251g_500g", "501g_1kg"]
     df["faixa_peso"] = pd.Categorical(df["faixa_peso"], categories=ordem, ordered=True)
@@ -124,12 +164,13 @@ def grafico_faixa_peso_loja():
     ax.set_xlabel("Faixa de peso")
     ax.set_ylabel("Preco mediano por 500g (R$)")
     ax.legend(title="Loja")
+    rotular_barras_verticais(ax)
 
-    salvar(fig, "06_preco_500g_faixa_peso_loja.png")
+    salvar(fig, "05_preco_500g_faixa_peso_loja.png")
 
 
 def grafico_preco_fabricante():
-    df = pd.read_csv(RESULTS / "analise_preco_fabricante.csv")
+    df = pd.read_csv(TABELAS / "06_analise_preco_fabricante.csv")
     df = df[df["count"] >= 5].copy()
     top = df.sort_values("median", ascending=False).head(15)
     top = top.sort_values("median", ascending=True)
@@ -139,24 +180,9 @@ def grafico_preco_fabricante():
     ax.set_title("Fabricantes com maior preco mediano")
     ax.set_xlabel("Preco mediano (R$)")
     ax.set_ylabel("Fabricante")
+    rotular_barras_horizontais(ax)
 
-    salvar(fig, "07_preco_mediano_fabricante.png")
-
-
-def grafico_evolucao_preco():
-    df = pd.read_csv(RESULTS / "evolucao_preco_cafe.csv")
-    df["Data"] = pd.to_datetime(df["Data"])
-
-    fig, ax = plt.subplots()
-    ax.plot(df["Data"], df["Média Preço Normal"], marker="o", label="Preco normal")
-    ax.plot(df["Data"], df["Média Preço Oferta"], marker="o", label="Preco oferta")
-    ax.set_title("Evolucao do preco medio")
-    ax.set_xlabel("Data")
-    ax.set_ylabel("Preco medio (R$)")
-    ax.legend()
-    fig.autofmt_xdate()
-
-    salvar(fig, "08_evolucao_preco_medio.png")
+    salvar(fig, "06_preco_mediano_fabricante.png")
 
 
 def main():
@@ -168,7 +194,6 @@ def main():
     grafico_preco_normalizado_loja()
     grafico_faixa_peso_loja()
     grafico_preco_fabricante()
-    grafico_evolucao_preco()
     print(f"Graficos salvos em: {OUT}")
 
 

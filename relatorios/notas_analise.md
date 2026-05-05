@@ -33,8 +33,8 @@ https://marche.com.br/collections/mercearia/products/cafe-espresso-graos-cafe-do
 Normalizacao por peso implementada nos arquivos:
 
 - `base_cafe_normalizada_peso.csv`: base consolidada com peso extraido do titulo, unidade original, faixa de peso, preco por 100g, preco por 500g e preco por unidade.
-- `analise_preco_normalizado_peso_loja.csv`: resumo por loja com cobertura de peso e medianas normalizadas.
-- `analise_faixa_peso_loja.csv`: comparacao de preco por loja e faixa de peso.
+- `05_analise_preco_normalizado_peso_loja.csv`: resumo por loja com cobertura de peso e medianas normalizadas.
+- `04_analise_faixa_peso_loja.csv`: comparacao de preco por loja e faixa de peso.
 
 A extracao identifica produtos em g e kg, converte kg para gramas e separa produtos sem peso explicito. Quando existe quantidade de capsulas/unidades no titulo, tambem calcula preco por unidade.
 
@@ -83,46 +83,34 @@ Leitura da tabela:
 
 A faixa `ate_100g` tende a apresentar preco por 500g muito mais alto, porque concentra capsulas e produtos pequenos. Ja a faixa `251g_500g` e melhor para comparar cafes tradicionais de pacote, pois reduz a distorcao causada por capsulas e itens premium pequenos.
 
+Importante: o `preco_500g_mediano` nao significa que o produto custa esse valor na prateleira. Ele mostra quanto o produto custaria proporcionalmente se tivesse 500g.
+
+Exemplo:
+
+- Uma caixa de capsulas com 50g custa R$25.
+- Como 500g equivale a 10 vezes 50g, o preco proporcional por 500g fica R$250.
+- Isso nao quer dizer que a caixa custa R$250; ela continua custando R$25.
+- O calculo apenas mostra que, por quantidade de cafe, capsulas e produtos pequenos sao mais caros que pacotes tradicionais.
+
+Por isso, no grafico de preco por 500g por faixa de peso, a faixa `ate_100g` aparece mais alta. Ela concentra produtos pequenos, que ficam caros quando comparados em uma base proporcional de 500g.
+
 Essa separacao deixa a analise mais justa: em vez de comparar todos os cafes juntos, compara produtos por tamanho aproximado.
 
 ## Graficos da analise
 
-Os graficos foram gerados na pasta `results/graficos` pelo script `scripts/gerar_graficos.py`.
+Os graficos estao organizados na pasta `relatorios/graficos`.
 
 Arquivos gerados:
 
 - `01_preco_por_loja.png`: compara media e mediana de preco por loja.
 - `02_distribuicao_precos_loja.png`: mostra a dispersao de precos por loja e evidencia outliers.
 - `03_top_fabricantes_mix.png`: mostra os fabricantes com maior quantidade total de produtos.
-- `04_mix_fabricantes_por_loja.png`: compara o mix dos principais fabricantes entre as lojas.
-- `05_preco_500g_por_loja.png`: compara o preco mediano normalizado para 500g por loja.
-- `06_preco_500g_faixa_peso_loja.png`: compara o preco por 500g dentro de cada faixa de peso e loja, desconsiderando `sem_peso` porque essa categoria nao permite normalizacao por gramas.
-- `07_preco_mediano_fabricante.png`: destaca fabricantes com maior preco mediano, considerando fabricantes com pelo menos 5 produtos.
-- `08_evolucao_preco_medio.png`: mostra a evolucao do preco medio no periodo analisado.
+- `3.1_mix_fabricantes_por_loja.png`: compara o mix dos principais fabricantes entre as lojas.
+- `04_preco_500g_por_loja.png`: compara o preco mediano normalizado para 500g por loja.
+- `05_preco_500g_faixa_peso_loja.png`: compara o preco por 500g dentro de cada faixa de peso e loja, desconsiderando `sem_peso` porque essa categoria nao permite normalizacao por gramas.
+- `06_preco_mediano_fabricante.png`: destaca fabricantes com maior preco mediano, considerando fabricantes com pelo menos 5 produtos.
 
-Para uma apresentacao, os graficos mais importantes sao `01_preco_por_loja.png`, `02_distribuicao_precos_loja.png`, `04_mix_fabricantes_por_loja.png`, `05_preco_500g_por_loja.png` e `06_preco_500g_faixa_peso_loja.png`.
-
-## Evolucao de preco do cafe
-
-Mercado relativamente estavel.
-
-O preco medio varia pouco, de 30,14 para 31,03 e depois 29,85, o que indica precos consistentes no periodo curto analisado. Pequenas oscilacoes podem refletir ajustes de estoque.
-
-Alta dispersao de precos.
-
-O desvio alto, entre aproximadamente 13 e 15, indica variedade de precos entre produtos, provavelmente devido a marcas premium vs tradicionais, tamanhos diferentes de pacotes e linhas gourmet ou capsulas especiais.
-
-O consumidor encontra desde produtos economicos ate premium, e isso aumenta a dispersao mesmo com preco medio estavel.
-
-Nenhuma promocao significativa nesse periodo.
-
-Desconto medio 0% significa que nenhuma promocao impactou o preco medio.
-
-Possivel sinal de ajuste de precos:
-
-- 06/03: 30.14
-- 07/03: 31.03, aumento
-- 08/03: 29.85, queda
+Para uma apresentacao, os graficos mais importantes sao `01_preco_por_loja.png`, `02_distribuicao_precos_loja.png`, `3.1_mix_fabricantes_por_loja.png`, `04_preco_500g_por_loja.png` e `05_preco_500g_faixa_peso_loja.png`.
 
 ## Analise de preco por fabricante
 
