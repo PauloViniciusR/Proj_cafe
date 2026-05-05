@@ -14,6 +14,42 @@ BASE = ROOT / "base"
 TABELAS = ROOT / "relatorios" / "tabelas"
 OUT = ROOT / "relatorios" / "graficos"
 
+PALETAS_GRAFICOS = {
+    "cafeteria_contraste": [
+        "#2F4858",
+        "#D17A22",
+        "#2A9D8F",
+        "#8E5572",
+        "#E9C46A",
+        "#5C6B73",
+    ],
+    "premium_suave": [
+        "#264653",
+        "#E76F51",
+        "#F4A261",
+        "#6A994E",
+        "#577590",
+        "#B56576",
+    ],
+    "varejo_vivo": [
+        "#006D77",
+        "#FFB703",
+        "#C1121F",
+        "#457B9D",
+        "#7B2CBF",
+        "#2D6A4F",
+    ],
+    "executiva_limpa": [
+        "#1B4965",
+        "#CA6702",
+        "#0A9396",
+        "#9B2226",
+        "#6C757D",
+        "#94D2BD",
+    ],
+}
+PALETA_ATIVA = "cafeteria_contraste"
+
 
 def salvar(fig, nome):
     OUT.mkdir(parents=True, exist_ok=True)
@@ -22,12 +58,26 @@ def salvar(fig, nome):
     plt.close(fig)
 
 
-def configurar_estilo():
+def obter_paleta(nome=PALETA_ATIVA, n_cores=None):
+    if nome not in PALETAS_GRAFICOS:
+        opcoes = ", ".join(PALETAS_GRAFICOS)
+        raise ValueError(f"Paleta '{nome}' nao existe. Opcoes: {opcoes}")
+
+    paleta = PALETAS_GRAFICOS[nome]
+    if n_cores is None:
+        return paleta
+    return sns.color_palette(paleta, n_colors=n_cores)
+
+
+def configurar_estilo(paleta=PALETA_ATIVA):
     sns.set_theme(style="whitegrid", context="notebook")
+    sns.set_palette(obter_paleta(paleta))
     plt.rcParams["figure.figsize"] = (10, 6)
     plt.rcParams["axes.titleweight"] = "bold"
     plt.rcParams["axes.labelsize"] = 11
     plt.rcParams["axes.titlesize"] = 14
+    plt.rcParams["font.weight"] = "regular"
+    plt.rcParams["axes.prop_cycle"] = plt.cycler(color=obter_paleta(paleta))
 
 
 def formatar_valor(valor, casas=2):
@@ -47,6 +97,7 @@ def rotular_barras_verticais(ax, casas=2):
             label_type="edge",
             padding=-15,
             fontsize=9,
+            fontweight="bold",
             color="white",
         )
     ax.margins(y=0.12)
@@ -61,6 +112,7 @@ def rotular_barras_horizontais(ax, casas=2):
             label_type="edge",
             padding=-30,
             fontsize=9,
+            fontweight="bold",
             color="white",
         )
     ax.margins(x=0.15)
@@ -74,8 +126,21 @@ def grafico_preco_por_loja():
     x = range(len(df))
     largura = 0.36
 
-    ax.bar([i - largura / 2 for i in x], df["mean"], width=largura, label="Media")
-    ax.bar([i + largura / 2 for i in x], df["median"], width=largura, label="Mediana")
+    paleta = obter_paleta(n_cores=2)
+    ax.bar(
+        [i - largura / 2 for i in x],
+        df["mean"],
+        width=largura,
+        label="Media",
+        color=paleta[0],
+    )
+    ax.bar(
+        [i + largura / 2 for i in x],
+        df["median"],
+        width=largura,
+        label="Mediana",
+        color=paleta[1],
+    )
     ax.set_xticks(list(x))
     ax.set_xticklabels(df["Loja"])
     ax.set_title("Preco medio e mediano por loja")
@@ -91,7 +156,15 @@ def grafico_distribuicao_precos():
     df = df[df["preco"].notna()].copy()
 
     fig, ax = plt.subplots()
-    sns.boxplot(data=df, x="loja", y="preco", ax=ax)
+    sns.boxplot(
+        data=df,
+        x="loja",
+        y="preco",
+        hue="loja",
+        ax=ax,
+        palette=obter_paleta(n_cores=df["loja"].nunique()),
+        legend=False,
+    )
     ax.set_title("Distribuicao de precos por loja")
     ax.set_xlabel("Loja")
     ax.set_ylabel("Preco (R$)")
@@ -105,7 +178,7 @@ def grafico_mix_fabricantes():
     top = top.sort_values("Total", ascending=True)
 
     fig, ax = plt.subplots(figsize=(10, 7))
-    ax.barh(top["Fabricante"], top["Total"])
+    ax.barh(top["Fabricante"], top["Total"], color=obter_paleta(n_cores=1)[0])
     ax.set_title("Top fabricantes por quantidade de produtos")
     ax.set_xlabel("Quantidade de produtos")
     ax.set_ylabel("Fabricante")
@@ -120,7 +193,7 @@ def grafico_mix_por_loja():
     top = top.set_index("Fabricante")[["Mambo", "St.Marche", "Paodeacucar"]]
 
     fig, ax = plt.subplots(figsize=(11, 7))
-    top.plot(kind="bar", ax=ax)
+    top.plot(kind="bar", ax=ax, color=obter_paleta(n_cores=3))
     ax.set_title("Mix dos principais fabricantes por loja")
     ax.set_xlabel("Fabricante")
     ax.set_ylabel("Quantidade de produtos")
@@ -136,7 +209,15 @@ def grafico_preco_normalizado_loja():
     df = df.sort_values("preco_500g_mediano", ascending=False)
 
     fig, ax = plt.subplots()
-    sns.barplot(data=df, x="loja", y="preco_500g_mediano", ax=ax)
+    sns.barplot(
+        data=df,
+        x="loja",
+        y="preco_500g_mediano",
+        hue="loja",
+        ax=ax,
+        palette=obter_paleta(n_cores=len(df)),
+        legend=False,
+    )
     ax.set_title("Preco mediano normalizado por 500g")
     ax.set_xlabel("Loja")
     ax.set_ylabel("Preco mediano por 500g (R$)")
@@ -159,6 +240,7 @@ def grafico_faixa_peso_loja():
         y="preco_500g_mediano",
         hue="loja",
         ax=ax,
+        palette=obter_paleta(n_cores=df["loja"].nunique()),
     )
     ax.set_title("Preco por 500g por faixa de peso e loja")
     ax.set_xlabel("Faixa de peso")
@@ -176,7 +258,7 @@ def grafico_preco_fabricante():
     top = top.sort_values("median", ascending=True)
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    ax.barh(top["Fabricante"], top["median"])
+    ax.barh(top["Fabricante"], top["median"], color=obter_paleta(n_cores=1)[0])
     ax.set_title("Fabricantes com maior preco mediano")
     ax.set_xlabel("Preco mediano (R$)")
     ax.set_ylabel("Fabricante")
