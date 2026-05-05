@@ -36,7 +36,7 @@ Proj_cafe/
 ├── dados/                      # Bases utilizadas no projeto
 ├── notebooks/
 │   ├── 01_analise_cafe.ipynb   # Análise principal
-│   └── eda/                    # Notebooks exploratórios por loja
+│   └── EDA/                    # Notebooks exploratórios por loja
 ├── relatorios/
 │   ├── graficos/               # Visualizações exportadas (.png)
 │   └── tabelas/                # Tabelas de análise geradas (.csv)

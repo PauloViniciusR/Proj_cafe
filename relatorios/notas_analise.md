@@ -110,8 +110,6 @@ Arquivos gerados:
 - `05_preco_500g_faixa_peso_loja.png`: compara o preco por 500g dentro de cada faixa de peso e loja, desconsiderando `sem_peso` porque essa categoria nao permite normalizacao por gramas.
 - `06_preco_mediano_fabricante.png`: destaca fabricantes com maior preco mediano, considerando fabricantes com pelo menos 5 produtos.
 
-Para uma apresentacao, os graficos mais importantes sao `01_preco_por_loja.png`, `02_distribuicao_precos_loja.png`, `3.1_mix_fabricantes_por_loja.png`, `04_preco_500g_por_loja.png` e `05_preco_500g_faixa_peso_loja.png`.
-
 ## Analise de preco por fabricante
 
 A analise de precos por fabricante indica que o mercado de cafe possui concentracao de produtos em faixas de preco intermediarias.
