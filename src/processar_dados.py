@@ -150,7 +150,8 @@ def main() -> None:
     df = arredondar_colunas(df, casas=4)
 
     BASE_PROCESSADA.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(BASE_PROCESSADA, index=False)
+    base_publica = df.drop(columns=["fabricante_original"], errors="ignore")
+    base_publica.to_csv(BASE_PROCESSADA, index=False)
     salvar_tabelas(df)
     print(f"Base e tabelas regeneradas a partir de {len(df)} produtos.")
 
