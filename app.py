@@ -6,7 +6,9 @@ import streamlit as st
 
 
 ROOT = Path(__file__).resolve().parent
-BASE_PATH = ROOT / "base" / "base_cafe_normalizada_peso.csv"
+BASE_PUBLICA_PATH = ROOT / "data" / "processed" / "base_cafe_normalizada_peso.csv"
+BASE_LOCAL_PATH = ROOT / "base" / "base_cafe_normalizada_peso.csv"
+BASE_CANDIDATES = [BASE_PUBLICA_PATH, BASE_LOCAL_PATH]
 
 
 st.set_page_config(
@@ -17,14 +19,16 @@ st.set_page_config(
 
 @st.cache_data
 def carregar_dados() -> pd.DataFrame:
-    if not BASE_PATH.exists():
+    base_path = next((path for path in BASE_CANDIDATES if path.exists()), None)
+    if base_path is None:
         st.error(
-            "Base local não encontrada. Coloque o arquivo "
-            "`base/base_cafe_normalizada_peso.csv` para executar o dashboard."
+            "Base processada não encontrada. Para publicar o dashboard, inclua o arquivo "
+            "`data/processed/base_cafe_normalizada_peso.csv` no repositório. "
+            "Para uso local, também é possível usar `base/base_cafe_normalizada_peso.csv`."
         )
         st.stop()
 
-    df = pd.read_csv(BASE_PATH)
+    df = pd.read_csv(base_path)
     for coluna in ["preco", "preco_500g", "preco_100g", "peso_gramas"]:
         df[coluna] = pd.to_numeric(df[coluna], errors="coerce")
     return df
@@ -93,7 +97,7 @@ col1.metric("Produtos", f"{produtos:,}".replace(",", "."))
 col2.metric("Lojas", lojas_ativas)
 col3.metric("Preço mediano", formatar_moeda(preco_mediano))
 col4.metric("Mediana por 500g", formatar_moeda(preco_500g_mediano))
-col5.metric("Cobertura de peso", f"{cobertura_peso:.1f}%".replace(".", ","))
+col5.metric("% com peso identificado", f"{cobertura_peso:.1f}%".replace(".", ","))
 
 st.markdown(
     "**Como ler os KPIs:** a mediana representa melhor o preço típico, pois reduz "

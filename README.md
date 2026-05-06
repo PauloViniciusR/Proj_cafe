@@ -30,8 +30,11 @@ O projeto foi posicionado como um case de **Analista de Dados/BI**, com foco em:
 
 A base contém produtos de café coletados em lojas como Mambo, St Marche e Pão de Açúcar. Os dados brutos ficam na pasta `base/`, mas essa pasta está preparada para não versionar arquivos `.csv` e `.xlsx` no GitHub.
 
-Isso evita publicar dados brutos quando eles não puderem ser compartilhados. Os resultados derivados do projeto ficam em:
+Isso evita publicar dados brutos quando eles não puderem ser compartilhados. Para permitir a publicação do dashboard, o projeto mantém uma base processada e reduzida em `data/processed/base_cafe_normalizada_peso.csv`, contendo apenas os campos necessários para os indicadores e gráficos.
 
+Os resultados derivados do projeto ficam em:
+
+- `data/processed/`: base processada usada pelo dashboard publicado;
 - `relatorios/tabelas/`: tabelas consolidadas da análise;
 - `relatorios/graficos/`: gráficos exportados;
 - `relatorios/notas_analise.md`: notas detalhadas da análise;
@@ -91,6 +94,8 @@ pip install -r requirements.txt
 .
 ├── app.py                         # Dashboard interativo em Streamlit
 ├── base/                          # Dados brutos locais, não versionados
+├── data/
+│   └── processed/                 # Base processada para o dashboard
 ├── notebooks/                     # Análises exploratórias
 ├── relatorios/
 │   ├── graficos/                  # Gráficos exportados
