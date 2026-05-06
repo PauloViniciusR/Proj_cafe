@@ -84,7 +84,7 @@ faixas = selecionar_multiplos("Faixas de peso", sorted(df["faixa_peso"].dropna()
 
 fabricantes_opcoes = sorted(df["Fabricante"].dropna().unique())
 fabricantes = st.sidebar.multiselect(
-    "Fabricantes",
+    "Fabricantes normalizados",
     options=fabricantes_opcoes,
     default=[],
     help="Deixe vazio para considerar todos os fabricantes.",
@@ -214,6 +214,37 @@ with tab_lojas:
         },
     )
     c2.plotly_chart(fig_faixa, width="stretch")
+
+    resumo_tipo = (
+        dados.dropna(subset=["preco_500g"])
+        .groupby(["loja", "tipo_produto"], as_index=False)
+        .agg(
+            preco_500g_mediano=("preco_500g", "median"),
+            preco_unidade_mediano=("preco_unidade", "median"),
+            produtos=("Titulo", "count"),
+        )
+    )
+
+    fig_tipo = px.bar(
+        resumo_tipo,
+        x="tipo_produto",
+        y="preco_500g_mediano",
+        color="loja",
+        barmode="group",
+        title="Preço por 500g por tipo de produto",
+        labels={
+            "tipo_produto": "Tipo de produto",
+            "preco_500g_mediano": "Preço por 500g (R$)",
+            "loja": "Loja",
+        },
+        hover_data={
+            "produtos": True,
+            "preco_unidade_mediano": ":.2f",
+            "preco_500g_mediano": ":.2f",
+        },
+    )
+    st.plotly_chart(fig_tipo, width="stretch")
+
     st.info(
         "Ponto de atenção: faixas pequenas, como cápsulas e porções individuais, "
         "normalmente ficam mais caras quando convertidas para 500g. Para comparar "

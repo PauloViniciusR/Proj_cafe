@@ -12,6 +12,76 @@ FAIXAS_PESO = [
     (500, 1000, "501g_1kg"),
 ]
 
+MAPA_FABRICANTES = {
+    "3 coracoes": "3 Corações",
+    "3 corações": "3 Corações",
+    "tres": "3 Corações",
+    "tres coracoes": "3 Corações",
+    "três": "3 Corações",
+    "três corações": "3 Corações",
+    "l'or": "L'OR",
+    "lor": "L'OR",
+    "orfeu": "Orfeu",
+    "santa monica": "Santa Mônica",
+    "santa mônica": "Santa Mônica",
+    "bravo": "Bravo Café",
+    "bravo cafe": "Bravo Café",
+    "bravo café": "Bravo Café",
+    "qualita": "Qualitá",
+    "qualitá": "Qualitá",
+    "qualita exclusive": "Qualitá",
+    "qualitá exclusive": "Qualitá",
+    "prima qualita": "Prima Qualitá",
+    "prima qualitá": "Prima Qualitá",
+    "cafe do ponto": "Café do Ponto",
+    "café do ponto": "Café do Ponto",
+    "café do ponto": "Café do Ponto",
+    "do ponto": "Café do Ponto",
+    "cafe floresta": "Floresta",
+    "floresta": "Floresta",
+    "cafe iguacu": "Iguaçu",
+    "café iguaçu": "Iguaçu",
+    "iguacu": "Iguaçu",
+    "iguaçu": "Iguaçu",
+    "nescafe": "Nescafé",
+    "nescafé": "Nescafé",
+    "nescafe gold": "Nescafé",
+    "nescafé gold": "Nescafé",
+    "nescafe dolce gusto": "Nescafé",
+    "nescafé dolce gusto": "Nescafé",
+    "dolce gusto": "Nescafé",
+    "gold": "Nescafé",
+    "cafe uniao pouch 250g": "União",
+    "brasileiro": "Café Brasileiro",
+    "astro cafe": "Astro Café",
+    "cia organica": "Cia Orgânica",
+}
+
+FABRICANTES_TITULO = [
+    ("3 Corações", r"\b(3\s*coracoes|3\s*corecoes|3\s*corações|tres|três)\b"),
+    ("Pilão", r"\bpila[oã]\b"),
+    ("Melitta", r"\bmelitta\b"),
+    ("Nescafé", r"\b(nescafe|nescafé|dolce\s*gusto)\b"),
+    ("L'OR", r"\b(l\\?'?or|lor)\b"),
+    ("Qualitá", r"\bqualita\b"),
+    ("Baggio", r"\bbaggio\b"),
+    ("Bravo Café", r"\bbravo\b"),
+    ("Illy", r"\billy\b"),
+    ("Juan Valdez", r"\bjuan\s+valdez\b"),
+    ("Starbucks", r"\bstarbucks\b"),
+    ("Orfeu", r"\borfeu\b"),
+    ("Latitude 13", r"\blatitude\s*13\b"),
+    ("Cafellow", r"\bcafellow\b"),
+    ("Café do Ponto", r"\bdo\s*ponto\b"),
+    ("Floresta", r"\bfloresta\b"),
+    ("Iguaçu", r"\biguacu\b"),
+    ("União", r"\buniao\b"),
+    ("Tereza do Quilombo", r"\btereza\s+do\s+quilombo\b"),
+    ("Dandara do Quilombo", r"\bdandara\s+do\s+quilombo\b"),
+    ("Anastácia do Quilombo", r"\banastacia\s+do\s+quilombo\b"),
+    ("Kopenhagen", r"\bkopenhagen\b"),
+]
+
 
 def normalizar_texto(texto: object) -> str:
     if pd.isna(texto):
@@ -20,6 +90,37 @@ def normalizar_texto(texto: object) -> str:
     texto = unicodedata.normalize("NFKD", texto)
     texto = "".join(char for char in texto if not unicodedata.combining(char))
     return texto
+
+
+def chave_texto(texto: object) -> str:
+    return " ".join(normalizar_texto(texto).split())
+
+
+def normalizar_fabricante(fabricante: object, titulo: object) -> str:
+    fabricante_chave = chave_texto(fabricante)
+    titulo_chave = chave_texto(titulo)
+
+    if fabricante_chave in MAPA_FABRICANTES:
+        return MAPA_FABRICANTES[fabricante_chave]
+
+    if fabricante_chave in {
+        "",
+        "nan",
+        "none",
+        "pa",
+        "nao identificado",
+        "st marche",
+        "st. marche",
+        "mambo",
+        "paodeacucar",
+        "pao de acucar",
+    }:
+        for fabricante_padrao, padrao in FABRICANTES_TITULO:
+            if re.search(padrao, titulo_chave):
+                return fabricante_padrao
+        return "Não identificado"
+
+    return str(fabricante).strip()
 
 
 def numero_pt_br(valor: str) -> float:
@@ -114,6 +215,11 @@ def classificar_faixa_peso(peso_gramas: object) -> str:
 def enriquecer_base_precos(df: pd.DataFrame) -> pd.DataFrame:
     dados = df.copy()
     dados["preco"] = pd.to_numeric(dados["preco"], errors="coerce")
+    dados["fabricante_original"] = dados["Fabricante"]
+    dados["Fabricante"] = dados.apply(
+        lambda linha: normalizar_fabricante(linha["Fabricante"], linha["Titulo"]),
+        axis=1,
+    )
     dados["tipo_produto"] = dados["Titulo"].apply(classificar_tipo_produto)
     dados["quantidade_unidades"] = dados["Titulo"].apply(extrair_quantidade_unidades)
     dados["peso_gramas"] = dados["Titulo"].apply(extrair_peso_gramas)

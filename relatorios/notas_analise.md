@@ -48,7 +48,7 @@ Nos cafés tradicionais, o preço por 500g é mais adequado para comparação di
 
 A análise por fabricante indica concentração em faixas intermediárias de preço, com marcas de entrada e marcas premium convivendo no mesmo mercado.
 
-Os nomes equivalentes de fabricantes foram consolidados antes da análise. Exemplos: Lor, L'Or e L'OR foram tratados como L'OR; ORFEU como Orfeu; Três, Três Corações e variantes foram tratados como 3 Corações.
+Os nomes equivalentes de fabricantes foram consolidados antes da análise. Exemplos: Lor, L'Or e L'OR foram tratados como L'OR; ORFEU como Orfeu; Três, Três Corações e variantes foram tratados como 3 Corações; Nescafé Gold, Nescafé Dolce Gusto e Dolce Gusto foram tratados como Nescafé. Registros genéricos de fabricante, como `pa`, foram reinferidos pelo título do produto quando havia marca identificável.
 
 Entre os fabricantes com pelo menos 5 produtos, Italle aparece com baixa variação de preço: média de R$15.88, mediana de R$13.99 e amplitude de R$5.00. Isso sugere posicionamento mais consistente em uma faixa acessível.
 
