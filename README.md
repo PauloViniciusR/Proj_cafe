@@ -72,21 +72,6 @@ Os resultados derivados do projeto ficam em:
 - Para comparar cafés tradicionais, a faixa de 251g a 500g é mais adequada do que comparar todo o mix junto.
 - O mix de fabricantes influencia diretamente a leitura de posicionamento de preço de cada loja.
 
-## Dashboard em Streamlit
-
-Streamlit é uma biblioteca Python que transforma análises em uma página interativa no navegador. Neste projeto, ele serve para apresentar KPIs, filtros e gráficos de precificação sem precisar criar um sistema web completo.
-
-Para executar:
-
-```bash
-streamlit run app.py
-```
-
-Se o ambiente ainda não tiver as bibliotecas do dashboard:
-
-```bash
-pip install -r requirements.txt
-```
 
 ## Estrutura
 
@@ -101,7 +86,7 @@ pip install -r requirements.txt
 │   ├── graficos/                  # Gráficos exportados
 │   ├── tabelas/                   # Indicadores consolidados
 │   ├── notas_analise.md           # Notas detalhadas da análise
-│   └── relatorio_executivo.md     # Resumo para negócio/gestão
+│   └── relatorio_executivo.md     # Resumo
 ├── src/
 │   ├── config.py                  # Caminhos e funções de carga
 │   ├── graficos.py                # Geração dos gráficos
@@ -115,13 +100,3 @@ pip install -r requirements.txt
 - A análise é majoritariamente descritiva, pois a base não possui histórico longo suficiente para modelagem temporal robusta.
 - O projeto não afirma implementar precificação dinâmica completa; ele entrega uma base analítica para apoiar decisões de preço.
 - Comparações entre lojas dependem do sortimento disponível em cada uma, então a interpretação deve considerar diferenças de mix, embalagem e fabricante.
-
-## Como apresentar este projeto
-
-Descrição curta para currículo ou mensagem ao gestor:
-
-> Desenvolvi um projeto de BI para análise de precificação de cafés em supermercados, com tratamento de dados em Python, normalização de preços por peso, criação de indicadores, comparação entre lojas, análise de mix de fabricantes e dashboard interativo para apoio à tomada de decisão.
-
-Descrição mais completa:
-
-> O projeto analisa preços de cafés em diferentes supermercados e demonstra como o preço bruto pode distorcer conclusões quando produtos possuem pesos diferentes. Foram criados indicadores de preço médio, mediano, preço por 100g, preço por 500g, cobertura de peso, faixa de embalagem e mix de fabricantes. A entrega inclui tabelas consolidadas, gráficos, relatório executivo e dashboard em Streamlit, simulando uma solução de BI para suporte a decisões de precificação.

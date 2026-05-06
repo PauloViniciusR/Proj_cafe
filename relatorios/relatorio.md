@@ -1,4 +1,4 @@
-# Relatório Executivo - Análise de Precificação de Cafés
+# Relatório - Análise de Precificação de Cafés
 
 ## Contexto
 
@@ -48,16 +48,4 @@ Usar o dashboard como ferramenta de acompanhamento recorrente para identificar m
 
 ## Limitações
 
-A base analisada representa um recorte de produtos disponíveis, não uma série histórica longa. Por esse motivo, o projeto não deve ser vendido como modelo completo de precificação dinâmica.
-
-O uso correto é como uma entrega de BI e análise de dados para apoiar decisões de preço. Uma etapa futura poderia incluir histórico de preços, volume de vendas, margem, estoque e dados de concorrência para evoluir para modelos preditivos.
-
-## Próximos passos sugeridos
-
-Adicionar histórico semanal ou mensal de preços.
-
-Incluir margem, custo e volume vendido para avaliar rentabilidade, não apenas preço.
-
-Criar alertas de produtos com preço acima ou abaixo do padrão da categoria.
-
-Evoluir para um modelo estatístico simples de preço esperado por fabricante, loja, peso e tipo de embalagem.
+A base analisada representa um recorte de produtos disponíveis, não uma série histórica longa. Por esse motivo, o projeto não é um modelo completo de precificação dinâmica.
