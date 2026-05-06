@@ -1,63 +1,63 @@
-# Relatorio Executivo - Analise de Precificacao de Cafes
+# Relatório Executivo - Análise de Precificação de Cafés
 
 ## Contexto
 
-Este projeto avalia precos de produtos de cafe em supermercados com o objetivo de apoiar decisoes de precificacao, comparacao competitiva e leitura de posicionamento de mercado.
+Este projeto avalia preços de produtos de café em supermercados com o objetivo de apoiar decisões de precificação, comparação competitiva e leitura de posicionamento de mercado.
 
-A analise considera que produtos de cafe possuem embalagens muito diferentes, como capsulas, porcoes pequenas, pacotes de 250g, 500g e 1kg. Por isso, comparar apenas o preco de prateleira pode levar a conclusoes distorcidas.
+A análise considera que produtos de café possuem embalagens muito diferentes, como cápsulas, porções pequenas, pacotes de 250g, 500g e 1kg. Por isso, comparar apenas o preço de prateleira pode levar a conclusões distorcidas.
 
 ## Perguntas respondidas
 
-- Qual loja tem maior preco medio e mediano?
-- O menor preco por item tambem representa menor preco por quantidade?
-- Como o preco muda quando normalizado para 500g?
-- Quais faixas de peso mais distorcem a comparacao?
+- Qual loja tem maior preço médio e mediano?
+- O menor preço por item também representa menor preço por quantidade?
+- Como o preço muda quando normalizado para 500g?
+- Quais faixas de peso mais distorcem a comparação?
 - Como o mix de fabricantes influencia o posicionamento das lojas?
 
 ## Principais resultados
 
-St Marche apresentou o maior preco medio e mediano no preco bruto, indicando um mix com maior participacao de itens premium ou produtos de maior valor agregado.
+St Marche apresentou o maior preço médio e mediano no preço bruto, indicando um mix com maior participação de itens premium ou produtos de maior valor agregado.
 
-Mambo ficou em posicao intermediaria no preco bruto, com comportamento semelhante ao St Marche quando os precos sao normalizados por 500g.
+Mambo ficou em posição intermediária no preço bruto, com comportamento semelhante ao St Marche quando os preços são normalizados por 500g.
 
-Pao de Acucar apresentou o menor preco mediano por item, mas passou a ter o maior preco mediano proporcional quando os produtos foram normalizados para 500g. Isso indica que parte dos produtos pode parecer competitiva no preco de prateleira, mas nao necessariamente no preco por quantidade.
+Pão de Açúcar apresentou o menor preço mediano por item, mas passou a ter o maior preço mediano proporcional quando os produtos foram normalizados para 500g. Isso indica que parte dos produtos pode parecer competitiva no preço de prateleira, mas não necessariamente no preço por quantidade.
 
 ## Insight central
 
-A principal conclusao e que a decisao de preco muda conforme a metrica usada.
+A principal conclusão é que a decisão de preço muda conforme a métrica usada.
 
-No preco bruto por item, Pao de Acucar parece mais competitivo. No preco proporcional por 500g, a leitura se inverte. Ja para pacotes tradicionais entre 251g e 500g, Pao de Acucar volta a aparecer como mais competitivo.
+No preço bruto por item, Pão de Açúcar parece mais competitivo. No preço proporcional por 500g, a leitura se inverte. Já para pacotes tradicionais entre 251g e 500g, Pão de Açúcar volta a aparecer como mais competitivo.
 
-Isso mostra que uma analise de precificacao precisa separar pelo menos tres visoes:
+Isso mostra que uma análise de precificação precisa separar pelo menos três visões:
 
-- preco por item;
-- preco por quantidade padronizada;
-- preco por faixa de embalagem.
+- preço por item;
+- preço por quantidade padronizada;
+- preço por faixa de embalagem.
 
-## Recomendacoes de negocio
+## Recomendações de negócio
 
-Usar preco mediano em vez de apenas preco medio para reduzir o impacto de produtos muito caros ou muito baratos.
+Usar preço mediano em vez de apenas preço médio para reduzir o impacto de produtos muito caros ou muito baratos.
 
-Comparar produtos por faixa de peso antes de tomar decisoes de reajuste, principalmente separando capsulas e porcoes individuais dos pacotes tradicionais.
+Comparar produtos por faixa de peso antes de tomar decisões de reajuste, principalmente separando cápsulas e porções individuais dos pacotes tradicionais.
 
-Monitorar o preco por 500g como indicador padronizado para comparar lojas e fabricantes.
+Monitorar o preço por 500g como indicador padronizado para comparar lojas e fabricantes.
 
-Analisar o mix de fabricantes junto com o preco, pois uma loja pode parecer mais cara simplesmente por trabalhar com maior concentracao de marcas premium.
+Analisar o mix de fabricantes junto com o preço, pois uma loja pode parecer mais cara simplesmente por trabalhar com maior concentração de marcas premium.
 
-Usar o dashboard como ferramenta de acompanhamento recorrente para identificar mudancas de posicionamento, produtos fora do padrao e oportunidades de ajuste.
+Usar o dashboard como ferramenta de acompanhamento recorrente para identificar mudanças de posicionamento, produtos fora do padrão e oportunidades de ajuste.
 
-## Limitacoes
+## Limitações
 
-A base analisada representa um recorte de produtos disponiveis, nao uma serie historica longa. Por esse motivo, o projeto nao deve ser vendido como modelo completo de precificacao dinamica.
+A base analisada representa um recorte de produtos disponíveis, não uma série histórica longa. Por esse motivo, o projeto não deve ser vendido como modelo completo de precificação dinâmica.
 
-O uso correto e como uma entrega de BI e analise de dados para apoiar decisoes de preco. Uma etapa futura poderia incluir historico de precos, volume de vendas, margem, estoque e dados de concorrencia para evoluir para modelos preditivos.
+O uso correto é como uma entrega de BI e análise de dados para apoiar decisões de preço. Uma etapa futura poderia incluir histórico de preços, volume de vendas, margem, estoque e dados de concorrência para evoluir para modelos preditivos.
 
-## Proximos passos sugeridos
+## Próximos passos sugeridos
 
-Adicionar historico semanal ou mensal de precos.
+Adicionar histórico semanal ou mensal de preços.
 
-Incluir margem, custo e volume vendido para avaliar rentabilidade, nao apenas preco.
+Incluir margem, custo e volume vendido para avaliar rentabilidade, não apenas preço.
 
-Criar alertas de produtos com preco acima ou abaixo do padrao da categoria.
+Criar alertas de produtos com preço acima ou abaixo do padrão da categoria.
 
-Evoluir para um modelo estatistico simples de preco esperado por fabricante, loja, peso e tipo de embalagem.
+Evoluir para um modelo estatístico simples de preço esperado por fabricante, loja, peso e tipo de embalagem.

@@ -1,76 +1,77 @@
-# Analise de Precificacao de Cafes em Supermercados
+# Análise de Precificação de Cafés em Supermercados
 
-Projeto de Analista de Dados/BI voltado a comparacao de precos, sortimento e posicionamento de produtos de cafe em supermercados. A proposta e transformar dados de prateleira em indicadores de apoio a decisao comercial, com foco em precificacao, mix de fabricantes e comparacao justa entre embalagens de tamanhos diferentes.
+Projeto de Analista de Dados/BI voltado à comparação de preços, sortimento e posicionamento de produtos de café em supermercados. A proposta é transformar dados de prateleira em indicadores de apoio à decisão comercial, com foco em precificação, mix de fabricantes e comparação justa entre embalagens de tamanhos diferentes.
 
-## Problema de negocio
+## Problema de negócio
 
-Comparar precos de produtos de cafe apenas pelo valor de prateleira pode gerar conclusoes incorretas. Um item de 50g pode parecer barato quando comparado a um pacote de 500g, mas ser muito mais caro quando o preco e convertido para uma mesma quantidade.
+Comparar preços de produtos de café apenas pelo valor de prateleira pode gerar conclusões incorretas. Um item de 50g pode parecer barato quando comparado a um pacote de 500g, mas ser muito mais caro quando o preço é convertido para uma mesma quantidade.
 
 Este projeto responde perguntas como:
 
-- Qual loja apresenta maior ou menor preco mediano?
-- O menor preco por embalagem tambem representa menor preco por quantidade?
+- Qual loja apresenta maior ou menor preço mediano?
+- O menor preço por embalagem também representa menor preço por quantidade?
 - Como o mix de fabricantes muda entre supermercados?
-- Quais fabricantes aparecem em faixas mais premium ou mais acessiveis?
-- Como embalagens pequenas, capsulas e porcoes individuais distorcem a leitura de preco?
+- Quais fabricantes aparecem em faixas mais premium ou mais acessíveis?
+- Como embalagens pequenas, cápsulas e porções individuais distorcem a leitura de preço?
 
 ## Objetivo
 
-Construir uma analise de apoio a precificacao para cafes vendidos em supermercados, usando Python para preparar os dados, gerar indicadores, criar visualizacoes e consolidar insights de negocio.
+Construir uma análise de apoio à precificação para cafés vendidos em supermercados, usando Python para preparar os dados, gerar indicadores, criar visualizações e consolidar insights de negócio.
 
 O projeto foi posicionado como um case de **Analista de Dados/BI**, com foco em:
 
-- preparacao e padronizacao de dados;
-- criacao de indicadores de preco;
-- analise exploratoria;
-- visualizacoes para tomada de decisao;
-- comunicacao executiva dos resultados.
+- preparação e padronização de dados;
+- criação de indicadores de preço;
+- análise exploratória;
+- visualizações para tomada de decisão;
+- comunicação executiva dos resultados.
 
 ## Dados
 
-A base contem produtos de cafe coletados em lojas como Mambo, St Marche e Pao de Acucar. Os dados brutos ficam na pasta `base/`, mas essa pasta esta preparada para nao versionar arquivos `.csv` e `.xlsx` no GitHub.
+A base contém produtos de café coletados em lojas como Mambo, St Marche e Pão de Açúcar. Os dados brutos ficam na pasta `base/`, mas essa pasta está preparada para não versionar arquivos `.csv` e `.xlsx` no GitHub.
 
-Isso evita publicar dados brutos quando eles nao puderem ser compartilhados. Os resultados derivados do projeto ficam em:
+Isso evita publicar dados brutos quando eles não puderem ser compartilhados. Os resultados derivados do projeto ficam em:
 
-- `relatorios/tabelas/`: tabelas consolidadas da analise;
-- `relatorios/graficos/`: graficos exportados;
-- `relatorios/relatorio_executivo.md`: leitura de negocio para apresentacao.
+- `relatorios/tabelas/`: tabelas consolidadas da análise;
+- `relatorios/graficos/`: gráficos exportados;
+- `relatorios/notas_analise.md`: notas detalhadas da análise;
+- `relatorios/relatorio_executivo.md`: leitura de negócio para apresentação.
 
 ## Metodologia
 
-1. **Coleta e consolidacao**
-   - reuniao dos produtos por loja;
-   - padronizacao de nomes de lojas e fabricantes;
-   - tratamento de precos e disponibilidade.
+1. **Coleta e consolidação**
+   - reunião dos produtos por loja;
+   - padronização de nomes de lojas e fabricantes;
+   - tratamento de preços e disponibilidade.
 
 2. **Tratamento e enriquecimento**
-   - extracao do peso em gramas;
-   - classificacao por faixa de peso;
-   - calculo de preco por 100g, 500g e unidade;
-   - consolidacao de fabricantes equivalentes.
+   - extração do peso em gramas;
+   - classificação por faixa de peso;
+   - cálculo de preço por 100g, 500g e unidade;
+   - consolidação de fabricantes equivalentes.
 
-3. **Analise**
-   - preco medio, mediano, minimo e maximo por loja;
-   - distribuicao de precos e outliers;
-   - comparacao do preco bruto contra preco normalizado por 500g;
-   - analise de mix de fabricantes;
-   - analise de preco por fabricante.
+3. **Análise**
+   - preço médio, mediano, mínimo e máximo por loja;
+   - distribuição de preços e outliers;
+   - comparação do preço bruto contra preço normalizado por 500g;
+   - análise de mix de fabricantes;
+   - análise de preço por fabricante.
 
-4. **Visualizacao**
-   - graficos estaticos exportados em PNG;
-   - dashboard opcional em Streamlit para exploracao interativa.
+4. **Visualização**
+   - gráficos estáticos exportados em PNG;
+   - dashboard em Streamlit para exploração interativa.
 
 ## Principais insights
 
-- St Marche possui o maior preco medio e mediano no preco bruto, sugerindo maior presenca de produtos premium.
-- Pao de Acucar tem o menor preco mediano por item, mas passa a ter o maior preco mediano quando o preco e normalizado por 500g.
-- Itens pequenos, como capsulas e porcoes individuais, elevam muito o preco proporcional por quantidade.
-- Para comparar cafes tradicionais, a faixa de 251g a 500g e mais adequada do que comparar todo o mix junto.
-- O mix de fabricantes influencia diretamente a leitura de posicionamento de preco de cada loja.
+- St Marche possui o maior preço médio e mediano no preço bruto, sugerindo maior presença de produtos premium.
+- Pão de Açúcar tem o menor preço mediano por item, mas passa a ter o maior preço mediano quando o preço é normalizado por 500g.
+- Itens pequenos, como cápsulas e porções individuais, elevam muito o preço proporcional por quantidade.
+- Para comparar cafés tradicionais, a faixa de 251g a 500g é mais adequada do que comparar todo o mix junto.
+- O mix de fabricantes influencia diretamente a leitura de posicionamento de preço de cada loja.
 
 ## Dashboard em Streamlit
 
-Streamlit e uma biblioteca Python que transforma analises em uma pagina interativa no navegador. Neste projeto, ele serve para apresentar KPIs, filtros e graficos de precificacao sem precisar criar um sistema web completo.
+Streamlit é uma biblioteca Python que transforma análises em uma página interativa no navegador. Neste projeto, ele serve para apresentar KPIs, filtros e gráficos de precificação sem precisar criar um sistema web completo.
 
 Para executar:
 
@@ -78,7 +79,7 @@ Para executar:
 streamlit run app.py
 ```
 
-Se o ambiente ainda nao tiver as bibliotecas do dashboard:
+Se o ambiente ainda não tiver as bibliotecas do dashboard:
 
 ```bash
 pip install -r requirements.txt
@@ -89,33 +90,33 @@ pip install -r requirements.txt
 ```text
 .
 ├── app.py                         # Dashboard interativo em Streamlit
-├── base/                          # Dados brutos locais, nao versionados
-├── notebooks/                     # Analises exploratorias
+├── base/                          # Dados brutos locais, não versionados
+├── notebooks/                     # Análises exploratórias
 ├── relatorios/
-│   ├── graficos/                  # Graficos exportados
+│   ├── graficos/                  # Gráficos exportados
 │   ├── tabelas/                   # Indicadores consolidados
-│   ├── notas_analise.md           # Notas detalhadas da analise
-│   └── relatorio_executivo.md     # Resumo para negocio/gestao
+│   ├── notas_analise.md           # Notas detalhadas da análise
+│   └── relatorio_executivo.md     # Resumo para negócio/gestão
 ├── src/
-│   ├── config.py                  # Caminhos e funcoes de carga
-│   ├── graficos.py                # Geracao dos graficos
-│   └── utils.py                   # Funcoes auxiliares
+│   ├── config.py                  # Caminhos e funções de carga
+│   ├── graficos.py                # Geração dos gráficos
+│   └── utils.py                   # Funções auxiliares
 ├── environment.yml
 └── README.md
 ```
 
-## Limitacoes
+## Limitações
 
-- A analise e majoritariamente descritiva, pois a base nao possui historico longo suficiente para modelagem temporal robusta.
-- O projeto nao afirma implementar precificacao dinamica completa; ele entrega uma base analitica para apoiar decisoes de preco.
-- Comparacoes entre lojas dependem do sortimento disponivel em cada uma, entao a interpretacao deve considerar diferencas de mix, embalagem e fabricante.
+- A análise é majoritariamente descritiva, pois a base não possui histórico longo suficiente para modelagem temporal robusta.
+- O projeto não afirma implementar precificação dinâmica completa; ele entrega uma base analítica para apoiar decisões de preço.
+- Comparações entre lojas dependem do sortimento disponível em cada uma, então a interpretação deve considerar diferenças de mix, embalagem e fabricante.
 
 ## Como apresentar este projeto
 
-Descricao curta para curriculo ou mensagem ao gestor:
+Descrição curta para currículo ou mensagem ao gestor:
 
-> Desenvolvi um projeto de BI para analise de precificacao de cafes em supermercados, com tratamento de dados em Python, normalizacao de precos por peso, criacao de indicadores, comparacao entre lojas, analise de mix de fabricantes e dashboard interativo para apoio a tomada de decisao.
+> Desenvolvi um projeto de BI para análise de precificação de cafés em supermercados, com tratamento de dados em Python, normalização de preços por peso, criação de indicadores, comparação entre lojas, análise de mix de fabricantes e dashboard interativo para apoio à tomada de decisão.
 
-Descricao mais completa:
+Descrição mais completa:
 
-> O projeto analisa precos de cafes em diferentes supermercados e demonstra como o preco bruto pode distorcer conclusoes quando produtos possuem pesos diferentes. Foram criados indicadores de preco medio, mediano, preco por 100g, preco por 500g, cobertura de peso, faixa de embalagem e mix de fabricantes. A entrega inclui tabelas consolidadas, graficos, relatorio executivo e dashboard em Streamlit, simulando uma solucao de BI para suporte a decisoes de precificacao.
+> O projeto analisa preços de cafés em diferentes supermercados e demonstra como o preço bruto pode distorcer conclusões quando produtos possuem pesos diferentes. Foram criados indicadores de preço médio, mediano, preço por 100g, preço por 500g, cobertura de peso, faixa de embalagem e mix de fabricantes. A entrega inclui tabelas consolidadas, gráficos, relatório executivo e dashboard em Streamlit, simulando uma solução de BI para suporte a decisões de precificação.
