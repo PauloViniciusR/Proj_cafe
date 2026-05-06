@@ -12,7 +12,7 @@ Este projeto responde perguntas como:
 - O menor preço por embalagem também representa menor preço por quantidade?
 - Como o mix de fabricantes muda entre supermercados?
 - Quais fabricantes aparecem em faixas mais premium ou mais acessíveis?
-- Como embalagens pequenas, cápsulas e porções individuais distorcem a leitura de preço?
+- Como embalagens pequenas, cápsulas, cafés solúveis e porções individuais distorcem a leitura de preço?
 
 ## Objetivo
 
@@ -48,7 +48,9 @@ Os resultados derivados do projeto ficam em:
    - tratamento de preços e disponibilidade.
 
 2. **Tratamento e enriquecimento**
-   - extração do peso em gramas;
+   - extração do peso total em gramas;
+   - extração da quantidade de unidades quando disponível;
+   - classificação do tipo de produto;
    - classificação por faixa de peso;
    - cálculo de preço por 100g, 500g e unidade;
    - consolidação de fabricantes equivalentes.
@@ -57,6 +59,7 @@ Os resultados derivados do projeto ficam em:
    - preço médio, mediano, mínimo e máximo por loja;
    - distribuição de preços e outliers;
    - comparação do preço bruto contra preço normalizado por 500g;
+   - comparação por tipo de produto;
    - análise de mix de fabricantes;
    - análise de preço por fabricante.
 
@@ -67,9 +70,9 @@ Os resultados derivados do projeto ficam em:
 ## Principais insights
 
 - St Marche possui o maior preço médio e mediano no preço bruto, sugerindo maior presença de produtos premium.
-- Pão de Açúcar tem o menor preço mediano por item, mas passa a ter o maior preço mediano quando o preço é normalizado por 500g.
-- Itens pequenos, como cápsulas e porções individuais, elevam muito o preço proporcional por quantidade.
-- Para comparar cafés tradicionais, a faixa de 251g a 500g é mais adequada do que comparar todo o mix junto.
+- Pão de Açúcar tem o menor preço mediano por item, mas passa a ter o maior preço mediano quando todo o mix é normalizado por 500g; essa leitura reflete efeito de sortimento.
+- Itens pequenos, como cápsulas e porções individuais, elevam muito o preço proporcional por quantidade e devem ser analisados também por preço por unidade.
+- Para comparar cafés tradicionais, use `tipo_produto = tradicional` e a faixa de 251g a 500g; nesse recorte, Pão de Açúcar aparece mais competitivo.
 - O mix de fabricantes influencia diretamente a leitura de posicionamento de preço de cada loja.
 
 
@@ -86,9 +89,11 @@ Os resultados derivados do projeto ficam em:
 │   ├── graficos/                  # Gráficos exportados
 │   ├── tabelas/                   # Indicadores consolidados
 │   ├── notas_analise.md           # Notas detalhadas da análise
-│   └── relatorio_executivo.md     # Resumo
+│   └── relatorio.md               # Resumo executivo
 ├── src/
 │   ├── config.py                  # Caminhos e funções de carga
+│   ├── features.py                # Extração de peso, unidades e tipo de produto
+│   ├── processar_dados.py         # Pipeline para regenerar base e tabelas
 │   ├── graficos.py                # Geração dos gráficos
 │   └── utils.py                   # Funções auxiliares
 ├── environment.yml
@@ -99,4 +104,5 @@ Os resultados derivados do projeto ficam em:
 
 - A análise é majoritariamente descritiva, pois a base não possui histórico longo suficiente para modelagem temporal robusta.
 - O projeto não afirma implementar precificação dinâmica completa; ele entrega uma base analítica para apoiar decisões de preço.
-- Comparações entre lojas dependem do sortimento disponível em cada uma, então a interpretação deve considerar diferenças de mix, embalagem e fabricante.
+- Comparações entre lojas dependem do sortimento disponível em cada uma, então a interpretação deve considerar diferenças de mix, embalagem, tipo de produto e fabricante.
+- Títulos truncados ou sem peso total confiável ficam sem preço por 500g para evitar outliers artificiais.

@@ -1,0 +1,19 @@
+loja,tipo_produto,produtos,produtos_com_peso,preco_mediano,preco_500g_mediano,preco_unidade_mediano
+Mambo,capsula,193,177,25.49,239.8,2.55
+Mambo,graos,43,43,48.98,79.99,
+Mambo,outros,3,3,23.98,93.27,
+Mambo,sache_drip,7,7,32.98,164.9,
+Mambo,soluvel,71,71,21.99,137.25,
+Mambo,tradicional,139,135,36.98,54.98,
+Paodeacucar,capsula,148,135,26.99,240.29,2.7
+Paodeacucar,graos,20,20,44.99,77.98,
+Paodeacucar,outros,3,3,26.99,53.98,
+Paodeacucar,sache_drip,6,6,21.44,78.92,
+Paodeacucar,soluvel,52,52,19.74,124.41,
+Paodeacucar,tradicional,107,107,32.99,48.99,
+St Marche,capsula,143,64,29.49,251.13,2.95
+St Marche,graos,16,16,59.0,82.47,
+St Marche,outros,12,10,36.99,43.85,16.67
+St Marche,sache_drip,4,2,47.14,141.46,4.99
+St Marche,soluvel,40,39,27.6,149.95,2.29
+St Marche,tradicional,67,67,40.99,67.8,

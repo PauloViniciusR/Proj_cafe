@@ -29,7 +29,14 @@ def carregar_dados() -> pd.DataFrame:
         st.stop()
 
     df = pd.read_csv(base_path)
-    for coluna in ["preco", "preco_500g", "preco_100g", "peso_gramas"]:
+    for coluna in [
+        "preco",
+        "preco_500g",
+        "preco_100g",
+        "peso_gramas",
+        "quantidade_unidades",
+        "preco_unidade",
+    ]:
         df[coluna] = pd.to_numeric(df[coluna], errors="coerce")
     return df
 
@@ -62,12 +69,17 @@ st.info(
     "Leitura principal: este projeto avalia preços de produtos de café em "
     "supermercados com o objetivo de apoiar decisões de precificação, comparação "
     "competitiva e leitura de posicionamento de mercado. A análise considera que "
-    "produtos de café possuem embalagens muito diferentes, como cápsulas, porções "
-    "pequenas, pacotes de 250g, 500g e 1kg. Por isso, comparar apenas o preço de "
-    "prateleira pode levar a conclusões distorcidas."
+    "produtos de café possuem embalagens muito diferentes, como cápsulas, cafés "
+    "solúveis, sachês, grãos e pacotes tradicionais. Por isso, comparar apenas o "
+    "preço de prateleira ou misturar todos os tipos no mesmo preço por 500g pode "
+    "levar a conclusões distorcidas."
 )
 
 lojas = selecionar_multiplos("Lojas", sorted(df["loja"].dropna().unique()))
+tipos = selecionar_multiplos(
+    "Tipos de produto",
+    sorted(df["tipo_produto"].dropna().unique()),
+)
 faixas = selecionar_multiplos("Faixas de peso", sorted(df["faixa_peso"].dropna().unique()))
 
 fabricantes_opcoes = sorted(df["Fabricante"].dropna().unique())
@@ -78,7 +90,11 @@ fabricantes = st.sidebar.multiselect(
     help="Deixe vazio para considerar todos os fabricantes.",
 )
 
-dados = df[df["loja"].isin(lojas) & df["faixa_peso"].isin(faixas)].copy()
+dados = df[
+    df["loja"].isin(lojas)
+    & df["tipo_produto"].isin(tipos)
+    & df["faixa_peso"].isin(faixas)
+].copy()
 if fabricantes:
     dados = dados[dados["Fabricante"].isin(fabricantes)].copy()
 
@@ -102,8 +118,9 @@ col5.metric("% com peso identificado", f"{cobertura_peso:.1f}%".replace(".", ","
 st.markdown(
     "**Como ler os KPIs:** a mediana representa melhor o preço típico, pois reduz "
     "o impacto de valores extremos, como produtos muito caros ou muito baratos. "
-    "Já a mediana por 500g padroniza produtos com diferentes pesos, permitindo "
-    "uma comparação mais justa da competitividade entre eles."
+    "Já a mediana por 500g só deve ser comparada entre produtos equivalentes. "
+    "Use o filtro de tipo de produto para separar cápsulas, solúveis, sachês, "
+    "grãos e cafés tradicionais."
 )
 
 tab_geral, tab_lojas, tab_fabricantes, tab_dados = st.tabs(
@@ -160,11 +177,10 @@ with tab_lojas:
     loja_menor_500g = loja_extremo(resumo_loja, "preco_500g_mediano", maior=False)
 
     st.markdown(
-        f"**Interpretação:** quando o preço é normalizado para 500g, "
-        f"`{loja_maior_500g}` apresenta o maior valor mediano por quantidade, "
-        f"enquanto `{loja_menor_500g}` tem o menor. Essa análise revela qual loja "
-        "é realmente mais cara ou mais barata considerando a mesma quantidade de "
-        "produto, e não apenas o preço final da embalagem."
+        f"**Interpretação:** nos filtros atuais, `{loja_maior_500g}` apresenta o "
+        f"maior valor mediano por 500g e `{loja_menor_500g}` o menor. Essa leitura "
+        "é válida quando os filtros mantêm produtos comparáveis; cápsulas e sachês "
+        "devem ser avaliados também por preço por unidade."
     )
 
     c1, c2 = st.columns(2)
@@ -201,7 +217,7 @@ with tab_lojas:
     st.info(
         "Ponto de atenção: faixas pequenas, como cápsulas e porções individuais, "
         "normalmente ficam mais caras quando convertidas para 500g. Para comparar "
-        "cafés tradicionais, a faixa de 251g a 500g tende a ser mais adequada."
+        "cafés tradicionais, selecione `tradicional` e a faixa de 251g a 500g."
     )
 
 with tab_fabricantes:
@@ -262,7 +278,9 @@ with tab_dados:
         "Titulo",
         "Fabricante",
         "loja",
+        "tipo_produto",
         "preco",
+        "quantidade_unidades",
         "peso_gramas",
         "faixa_peso",
         "preco_100g",

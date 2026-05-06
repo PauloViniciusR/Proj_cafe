@@ -10,7 +10,7 @@ import pandas as pd
 import seaborn as sns
 
 
-BASE = ROOT / "base"
+BASE = ROOT / "data" / "processed"
 TABELAS = ROOT / "relatorios" / "tabelas"
 OUT = ROOT / "relatorios" / "graficos"
 
@@ -226,6 +226,28 @@ def grafico_preco_normalizado_loja():
     salvar(fig, "04_preco_500g_por_loja.png")
 
 
+def grafico_preco_tipo_produto_loja():
+    df = pd.read_csv(TABELAS / "07_analise_tipo_produto_loja.csv")
+    df = df[df["produtos_com_peso"] > 0].copy()
+
+    fig, ax = plt.subplots(figsize=(12, 7))
+    sns.barplot(
+        data=df,
+        x="tipo_produto",
+        y="preco_500g_mediano",
+        hue="loja",
+        ax=ax,
+        palette=obter_paleta(n_cores=df["loja"].nunique()),
+    )
+    ax.set_title("Preco por 500g por tipo de produto e loja")
+    ax.set_xlabel("Tipo de produto")
+    ax.set_ylabel("Preco mediano por 500g (R$)")
+    ax.legend(title="Loja")
+    rotular_barras_verticais(ax)
+
+    salvar(fig, "07_preco_500g_tipo_produto_loja.png")
+
+
 def grafico_faixa_peso_loja():
     df = pd.read_csv(TABELAS / "04_analise_faixa_peso_loja.csv")
     df = df[df["faixa_peso"] != "sem_peso"].copy()
@@ -276,6 +298,7 @@ def main():
     grafico_preco_normalizado_loja()
     grafico_faixa_peso_loja()
     grafico_preco_fabricante()
+    grafico_preco_tipo_produto_loja()
     print(f"Graficos salvos em: {OUT}")
 
 
