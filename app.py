@@ -112,10 +112,9 @@ st.info(
     "Leitura principal: este projeto compara preços de produtos de café em "
     "supermercados considerando que o sortimento mistura cápsulas, cafés solúveis, "
     "sachês, grãos e pacotes tradicionais. A visão geral mostra o comportamento "
-    "do mix completo de cada loja. Para uma comparação justa de preço por "
-    "quantidade, utilize os filtros de tipo de produto e faixa de peso para não "
-    "comparar formatos diferentes, como cápsulas e pacotes tradicionais, na mesma "
-    "métrica."
+    "do mix completo de cada loja. A comparação por 500g deve ser lida com "
+    "atenção porque formatos diferentes, como cápsulas e pacotes tradicionais, "
+    "não representam a mesma base de consumo."
 )
 
 lojas = selecionar_multiplos("Lojas", sorted(df["loja_label"].dropna().unique()))
@@ -165,8 +164,8 @@ st.markdown(
     "**Como ler os KPIs:** a mediana representa melhor o preço típico, pois reduz "
     "o impacto de valores extremos, como produtos muito caros ou muito baratos. "
     "Já a mediana por 500g só deve ser comparada entre produtos equivalentes. "
-    "Utilize o filtro de tipo de produto para separar cápsulas, solúveis, sachês, "
-    "grãos e cafés tradicionais."
+    "A leitura fica mais consistente dentro de cada tipo de produto, separando "
+    "cápsulas, solúveis, sachês, grãos e cafés tradicionais."
 )
 
 tab_geral, tab_lojas, tab_fabricantes, tab_dados = st.tabs(
