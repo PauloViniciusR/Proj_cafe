@@ -99,10 +99,3 @@ Os resultados derivados do projeto ficam em:
 ├── environment.yml
 └── README.md
 ```
-
-## Limitações
-
-- A análise é majoritariamente descritiva, pois a base não possui histórico longo suficiente para modelagem temporal robusta.
-- O projeto não afirma implementar precificação dinâmica completa; ele entrega uma base analítica para apoiar decisões de preço.
-- Comparações entre lojas dependem do sortimento disponível em cada uma, então a interpretação deve considerar diferenças de mix, embalagem, tipo de produto e fabricante.
-- Títulos truncados ou sem peso total confiável ficam sem preço por 500g para evitar outliers artificiais.

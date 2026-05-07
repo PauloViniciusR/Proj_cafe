@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parent
 BASE_PUBLICA_PATH = ROOT / "data" / "processed" / "base_cafe_normalizada_peso.csv"
 BASE_LOCAL_PATH = ROOT / "base" / "base_cafe_normalizada_peso.csv"
 BASE_CANDIDATES = [BASE_PUBLICA_PATH, BASE_LOCAL_PATH]
+REPOSITORY_URL = "https://github.com/PauloViniciusR/Proj_"
 
 LOJA_LABELS = {
     "Mambo": "Mambo",
@@ -390,3 +391,9 @@ with tab_dados:
         file_name="dados_precificacao_cafe_filtrados.csv",
         mime="text/csv",
     )
+
+st.divider()
+st.caption(
+    "Para uma análise mais detalhada, acesse o "
+    f"[repositório do projeto]({REPOSITORY_URL})."
+)
