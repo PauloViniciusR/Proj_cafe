@@ -113,7 +113,7 @@ st.info(
     "supermercados considerando que o sortimento mistura cápsulas, cafés solúveis, "
     "sachês, grãos e pacotes tradicionais. A visão geral mostra o comportamento "
     "do mix completo de cada loja. Para uma comparação justa de preço por "
-    "quantidade, use os filtros de tipo de produto e faixa de peso, evitando "
+    "quantidade, utilize os filtros de tipo de produto e faixa de peso para não "
     "comparar formatos diferentes, como cápsulas e pacotes tradicionais, na mesma "
     "métrica."
 )
@@ -165,7 +165,7 @@ st.markdown(
     "**Como ler os KPIs:** a mediana representa melhor o preço típico, pois reduz "
     "o impacto de valores extremos, como produtos muito caros ou muito baratos. "
     "Já a mediana por 500g só deve ser comparada entre produtos equivalentes. "
-    "Use o filtro de tipo de produto para separar cápsulas, solúveis, sachês, "
+    "Utilize o filtro de tipo de produto para separar cápsulas, solúveis, sachês, "
     "grãos e cafés tradicionais."
 )
 
@@ -227,8 +227,9 @@ with tab_lojas:
     st.markdown(
         f"**Interpretação:** com os filtros atuais, `{loja_maior_500g}` tem a maior "
         f"mediana por 500g e `{loja_menor_500g}` a menor. Essa comparação mostra "
-        "diferença de preço proporcional, mas só é justa quando os produtos têm o "
-        "mesmo formato. Para cápsulas e sachês, acompanhe também o preço por unidade."
+        "diferença de preço proporcional, mas deve ser interpretada dentro do mesmo "
+        "tipo de produto, como cápsulas com cápsulas ou cafés tradicionais com "
+        "cafés tradicionais."
     )
 
     c1, c2 = st.columns(2)
